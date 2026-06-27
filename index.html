@@ -7,10 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
-    --bg: #0d0d0d; --surface: #161616; --accent: #c8a96e; --text: #f0ece4;
-    --muted: #7a7570; --border: #2a2620;
-  }
+  :root { --bg: #0d0d0d; --surface: #161616; --accent: #c8a96e; --text: #f0ece4; --muted: #7a7570; --border: #2a2620; }
   html { scroll-behavior: smooth; }
   body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; font-weight: 300; line-height: 1.7; overflow-x: hidden; }
   body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events: none; z-index: 999; opacity: 0.4; }
@@ -44,9 +41,9 @@
   .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; margin-top: 2rem; }
   .about-text p { color: var(--muted); margin-bottom: 1.25rem; font-size: 1rem; line-height: 1.8; }
   .about-text p strong { color: var(--text); }
-  .detail-row { display: flex; justify-content: space-between; align-items: baseline; padding: 1rem 0; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
-  .detail-label { color: var(--muted); letter-spacing: 0.05em; }
-  .detail-value { color: var(--accent); font-family: 'Playfair Display', serif; }
+  .skill-list { list-style: none; margin-top: 1rem; }
+  .skill-list li { padding: 0.75rem 0; border-bottom: 1px solid var(--border); font-size: 0.9rem; color: var(--muted); display: flex; align-items: center; gap: 0.75rem; }
+  .skill-list li::before { content: '◈'; color: var(--accent); font-size: 0.7rem; }
   .platforms { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 3rem; }
   .platform-tag { padding: 0.5rem 1.25rem; border: 1px solid var(--border); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); transition: all 0.3s; }
   .platform-tag:hover { border-color: var(--accent); color: var(--accent); }
@@ -56,15 +53,15 @@
   .contact-link { display: flex; align-items: center; gap: 1rem; color: var(--text); text-decoration: none; font-size: 0.95rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border); transition: color 0.3s; }
   .contact-link:hover { color: var(--accent); }
   .contact-link-icon { color: var(--accent); font-size: 1.1rem; width: 20px; }
-  .address-block { margin-top: 2rem; padding: 1.5rem; border: 1px solid var(--border); font-size: 0.9rem; color: var(--muted); line-height: 1.8; }
-  .address-block strong { color: var(--text); display: block; margin-bottom: 0.5rem; }
+  .address-block { margin-top: 2rem; padding: 1.5rem; border: 1px solid var(--border); font-size: 0.9rem; color: var(--muted); line-height: 2; }
+  .address-block strong { color: var(--text); display: block; margin-bottom: 0.25rem; font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; }
   .legal-section { padding: 4rem 4rem; border-top: 1px solid var(--border); }
   .legal-section h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 1.5rem; color: var(--accent); }
   .legal-section p, .legal-section li { font-size: 0.9rem; color: var(--muted); line-height: 1.8; margin-bottom: 0.75rem; }
   .legal-section ul { padding-left: 1.5rem; margin-bottom: 1rem; }
   .legal-section h4 { font-size: 1rem; color: var(--text); margin: 1.5rem 0 0.5rem; }
   .legal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
-  footer { padding: 2rem 4rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; color: var(--muted); }
+  footer { padding: 2rem 4rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; color: var(--muted); flex-wrap: wrap; gap: 0.5rem; }
   footer a { color: var(--muted); text-decoration: none; }
   footer a:hover { color: var(--accent); }
   @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
@@ -73,7 +70,7 @@
   @media (max-width: 768px) {
     nav { padding: 1.5rem 2rem; } .nav-links { display: none; } .hero { padding: 7rem 2rem 3rem; }
     section, .legal-section { padding: 4rem 2rem; } .about-grid, .contact-content, .legal-grid { grid-template-columns: 1fr; gap: 3rem; }
-    .hero-stats { gap: 2rem; flex-wrap: wrap; } footer { padding: 2rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+    .hero-stats { gap: 2rem; flex-wrap: wrap; } footer { padding: 2rem; flex-direction: column; text-align: center; }
   }
 </style>
 </head>
@@ -94,8 +91,7 @@
     <div class="hero-label">Digital Marketing Specialist</div>
     <h1>Michele<br><em>Castigliano</em></h1>
     <p class="hero-desc">
-      Freelance specialist in paid advertising across Google Ads and Meta Ads.
-      Data-driven campaign management, performance analysis, and growth strategies for clients across Italy and beyond.
+      Helping businesses grow their revenue through 360° digital marketing strategies — from paid advertising to web development, data-driven and results-oriented.
     </p>
     <a href="#contact" class="hero-cta">Get in touch →</a>
     <div class="hero-stats">
@@ -113,32 +109,43 @@
     <div class="service-card">
       <div class="service-icon">◈</div>
       <div class="service-title">Google Ads Management</div>
-      <p class="service-desc">Search, Performance Max, Display and Shopping campaigns. GAQL-based reporting, keyword strategy, bid optimization and budget allocation across multiple accounts via MCC. Direct API integration for automated performance monitoring.</p>
+      <p class="service-desc">Search, Performance Max, Display and Shopping campaigns. Keyword strategy, bid optimization, budget allocation and GAQL-based reporting across multiple accounts via Google Ads Manager (MCC). API integration for advanced performance monitoring.</p>
     </div>
     <div class="service-card">
       <div class="service-icon">◈</div>
-      <div class="service-title">Meta Ads Management</div>
-      <p class="service-desc">Facebook and Instagram campaign management via Meta Marketing API. Audience targeting, creative testing, funnel strategy and performance analysis across client Business Managers.</p>
+      <div class="service-title">Meta & TikTok Ads</div>
+      <p class="service-desc">Facebook, Instagram and TikTok campaign management. Audience targeting, creative strategy, funnel design and cross-platform performance analysis. TikTok GMV Max campaigns for e-commerce growth.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">◈</div>
+      <div class="service-title">Website Development</div>
+      <p class="service-desc">Design and development of professional websites and e-commerce stores on Shopify and other platforms. Landing page creation optimized for conversions, with a focus on performance and user experience.</p>
     </div>
     <div class="service-card">
       <div class="service-icon">◈</div>
       <div class="service-title">Performance Analysis & Reporting</div>
-      <p class="service-desc">In-depth reporting using Google Ads API and AI-assisted tools. CPA, ROAS, CTR benchmarking, cross-platform budget comparisons and actionable optimization recommendations. All data accessed internally via API for personal reporting use only.</p>
+      <p class="service-desc">In-depth cross-platform reporting using API integrations and AI-assisted tools. CPA, ROAS, CTR benchmarking, budget comparisons and actionable optimization strategies to maximize revenue growth.</p>
     </div>
     <div class="service-card">
       <div class="service-icon">◈</div>
-      <div class="service-title">API & Tracking Setup</div>
-      <p class="service-desc">Conversions API setup, dataset configuration, and Marketing API integrations. Technical troubleshooting for tracking issues, pixel events, and third-party tool connections.</p>
+      <div class="service-title">Tracking & API Setup</div>
+      <p class="service-desc">Google Tag Manager, GA4, Conversions API and Meta Pixel setup. Technical troubleshooting for tracking issues, dataset configuration, and third-party API integrations for advanced campaign automation.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">◈</div>
+      <div class="service-title">Growth Strategy</div>
+      <p class="service-desc">360° digital strategies to grow business revenue — combining paid advertising, organic presence, conversion optimization and data analysis to build scalable and sustainable growth systems for clients.</p>
     </div>
   </div>
   <div class="platforms">
     <span class="platform-tag">Google Ads</span>
     <span class="platform-tag">Meta Ads</span>
+    <span class="platform-tag">TikTok Ads</span>
     <span class="platform-tag">Google Analytics 4</span>
-    <span class="platform-tag">Meta Business Suite</span>
     <span class="platform-tag">Google Tag Manager</span>
     <span class="platform-tag">Google Ads API</span>
     <span class="platform-tag">Meta Marketing API</span>
+    <span class="platform-tag">Shopify</span>
     <span class="platform-tag">Looker Studio</span>
   </div>
 </section>
@@ -148,20 +155,23 @@
   <h2>About Me</h2>
   <div class="about-grid">
     <div class="about-text">
-      <p>I am <strong>Michele Castigliano</strong>, an independent freelance digital marketing specialist based in Castellammare di Stabia (NA), Italy. I operate as a sole proprietor, managing paid advertising campaigns on behalf of a portfolio of individual clients.</p>
-      <p>My work is centered on managing <strong>Google Ads and Meta Ads campaigns</strong> for small and medium businesses across multiple industries including e-commerce, fashion, food, and local services.</p>
-      <p>For each client, I am granted administrator access to their own Google Ads account through my <strong>Google Ads Manager (MCC) account</strong>. I use the <strong>Google Ads API</strong> as a personal internal tool to automate reporting and monitor campaign performance across all managed accounts simultaneously — strictly for my own internal use, never shared with third parties or resold as a service.</p>
-      <p>My approach combines technical API expertise with practical marketing experience to deliver measurable, data-driven results for clients ranging from local businesses to growing e-commerce brands.</p>
+      <p>I am <strong>Michele Castigliano</strong>, an independent freelance digital marketing specialist with over 10 years of experience helping businesses increase their revenue through data-driven strategies.</p>
+      <p>I specialize in <strong>360° digital marketing</strong> — from paid advertising management across Google, Meta and TikTok, to website and e-commerce development, conversion optimization and advanced API integrations.</p>
+      <p>My approach is always results-oriented: every strategy is built around measurable growth, combining technical expertise with a deep understanding of each client's business goals. I work with a select portfolio of clients across e-commerce, fashion, food, and service industries.</p>
+      <p>I use the <strong>Google Ads API</strong> and <strong>Meta Marketing API</strong> as internal tools to automate performance reporting and monitor campaign data across all managed accounts — enabling faster, more accurate optimization decisions for my clients.</p>
     </div>
-    <div class="about-details">
-      <div class="detail-row"><span class="detail-label">Name</span><span class="detail-value">Michele Castigliano</span></div>
-      <div class="detail-row"><span class="detail-label">Role</span><span class="detail-value">Freelance Specialist</span></div>
-      <div class="detail-row"><span class="detail-label">Location</span><span class="detail-value">Castellammare di Stabia (NA), Italy</span></div>
-      <div class="detail-row"><span class="detail-label">Focus</span><span class="detail-value">Paid Advertising</span></div>
-      <div class="detail-row"><span class="detail-label">Platforms</span><span class="detail-value">Google & Meta</span></div>
-      <div class="detail-row"><span class="detail-label">API Usage</span><span class="detail-value">Internal only</span></div>
-      <div class="detail-row"><span class="detail-label">MCC Account</span><span class="detail-value">316-909-5858</span></div>
-      <div class="detail-row"><span class="detail-label">Contact</span><span class="detail-value">info@michelecastigliano.com</span></div>
+    <div>
+      <ul class="skill-list">
+        <li>Google Ads campaign management (Search, PMax, Display, Shopping)</li>
+        <li>Meta Ads strategy (Facebook & Instagram)</li>
+        <li>TikTok Ads & GMV Max campaigns</li>
+        <li>Website & e-commerce development (Shopify)</li>
+        <li>Landing page design & CRO</li>
+        <li>Google Ads API & Meta Marketing API integration</li>
+        <li>Conversion tracking & analytics setup (GA4, GTM)</li>
+        <li>Cross-platform performance reporting</li>
+        <li>360° digital growth strategy</li>
+      </ul>
     </div>
   </div>
 </section>
@@ -171,14 +181,13 @@
   <h2>Contact</h2>
   <div class="contact-content">
     <div>
-      <p class="contact-intro">Available for new client engagements, campaign audits, and API integration consultations. Reach out via email or LinkedIn to discuss your advertising needs.</p>
+      <p class="contact-intro">Available for new client engagements, campaign audits, and digital strategy consultations. Reach out to discuss how I can help grow your business.</p>
       <div class="address-block">
-        <strong>Business Address</strong>
+        <strong>Business details</strong>
         Michele Castigliano<br>
-        Via Indipendenza<br>
-        Castellammare di Stabia (NA), 80053<br>
-        Italy<br><br>
-        VAT / P.IVA: IT (freelancer — sole proprietor)
+        Freelance Digital Marketing Specialist<br>
+        Castellammare di Stabia (NA), Italy<br>
+        P.IVA: IT09715471216
       </div>
     </div>
     <div class="contact-links">
@@ -200,11 +209,11 @@
       <h3>Privacy Policy</h3>
       <p>Last updated: June 2026</p>
       <h4>1. Data Controller</h4>
-      <p>Michele Castigliano, freelance digital marketing specialist, Castellammare di Stabia (NA), Italy. Contact: info@michelecastigliano.com</p>
+      <p>Michele Castigliano, freelance digital marketing specialist, Castellammare di Stabia (NA), Italy. P.IVA: IT09715471216. Contact: info@michelecastigliano.com</p>
       <h4>2. What data is collected</h4>
       <p>This website does not collect personal data from visitors. No cookies, tracking scripts, or analytics tools are installed on this site. If you contact me via email, I will process your name and email address solely to respond to your enquiry.</p>
-      <h4>3. Google Ads API usage</h4>
-      <p>I use the Google Ads API as an internal tool to access and analyse campaign performance data for client accounts that I manage. This data is accessed exclusively for internal reporting purposes and is never shared with third parties, stored on external servers, or used for any purpose other than direct campaign management and optimisation on behalf of the relevant client.</p>
+      <h4>3. API data usage</h4>
+      <p>I use the Google Ads API and Meta Marketing API as internal tools to access and analyse campaign performance data for client accounts that I manage under explicit written agreement. This data is accessed exclusively for internal reporting and optimisation purposes and is never shared with third parties, stored on external servers, or used beyond the scope of the relevant client engagement.</p>
       <h4>4. Your rights</h4>
       <p>Under GDPR (EU Regulation 2016/679), you have the right to access, rectify, delete, or restrict processing of your personal data. To exercise these rights, contact: info@michelecastigliano.com</p>
       <h4>5. Data retention</h4>
@@ -214,24 +223,24 @@
       <h3>Terms of Service</h3>
       <p>Last updated: June 2026</p>
       <h4>1. Services provided</h4>
-      <p>Michele Castigliano provides freelance digital marketing services including Google Ads and Meta Ads campaign management, performance analysis, and API-based reporting for individual clients on a contract basis.</p>
+      <p>Michele Castigliano provides freelance digital marketing services including Google Ads and Meta Ads campaign management, TikTok advertising, website development, performance analysis, and API-based reporting for individual clients on a contract basis.</p>
       <h4>2. API tools</h4>
-      <p>I use the Google Ads API and Meta Marketing API exclusively as internal tools for my own professional use. These integrations are used solely to access and analyse campaign data for accounts I directly manage under written agreement with each client. The tools are not offered as a service to third parties and are not externally accessible.</p>
+      <p>I use the Google Ads API and Meta Marketing API exclusively as internal professional tools. These integrations are used solely to access and analyse campaign data for accounts I directly manage under written agreement with each client. The tools are not offered as a service to third parties and are not externally accessible.</p>
       <h4>3. Client relationships</h4>
       <p>All client accounts are accessed under explicit written authorisation from each client, who retains full ownership of their advertising accounts at all times. I operate under a freelance service agreement with each client individually.</p>
       <h4>4. Limitation of liability</h4>
-      <p>Services are provided on a best-effort basis. Michele Castigliano is not liable for indirect or consequential losses arising from advertising campaign performance or API service interruptions beyond our control.</p>
+      <p>Services are provided on a best-effort basis. Michele Castigliano is not liable for indirect or consequential losses arising from advertising campaign performance or platform service interruptions beyond our control.</p>
       <h4>5. Governing law</h4>
       <p>These terms are governed by Italian law. Any disputes shall be subject to the jurisdiction of the competent Italian courts.</p>
       <h4>6. Contact</h4>
-      <p>For any queries: info@michelecastigliano.com</p>
+      <p>info@michelecastigliano.com</p>
     </div>
   </div>
 </div>
 
 <footer>
-  <span>© 2026 Michele Castigliano — Freelance Digital Marketing Specialist</span>
-  <span>Castellammare di Stabia (NA), Italy &nbsp;|&nbsp; <a href="mailto:info@michelecastigliano.com">info@michelecastigliano.com</a> &nbsp;|&nbsp; <a href="#privacy">Privacy Policy</a> &nbsp;|&nbsp; <a href="#privacy">Terms of Service</a></span>
+  <span>© 2026 Michele Castigliano — Freelance Digital Marketing Specialist — P.IVA IT09715471216</span>
+  <span><a href="mailto:info@michelecastigliano.com">info@michelecastigliano.com</a> &nbsp;|&nbsp; <a href="#privacy">Privacy Policy</a> &nbsp;|&nbsp; <a href="#privacy">Terms of Service</a></span>
 </footer>
 
 </body>
